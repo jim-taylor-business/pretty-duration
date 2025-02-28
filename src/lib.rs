@@ -64,7 +64,7 @@ const EXPANDED_PLURAL_DEFAULT: PrettyDurationLabels = PrettyDurationLabels {
 /// ```rust
 /// use std::time::Duration;
 /// use pretty_duration::pretty_duration;
-///    
+///
 /// let result = pretty_duration(&Duration::from_millis(1), None);
 /// assert_eq!(result, "1ms");
 /// ```
@@ -240,8 +240,8 @@ fn set_default_options(
 fn extract_bins(ms: &u128) -> DurationBins {
     return DurationBins {
         years: (ms / 31556926000) as u16,
-        months: (ms / 2629800000) as u8,
-        days: (ms / 86400000) as u8,
+        months: ((ms / 2629800000) % 12) as u8,
+        days: ((ms / 86400000) % 30) as u8,
         hours: ((ms / 3600000) % 24) as u8,
         minutes: ((ms / 60000) % 60) as u8,
         seconds: ((ms / 1000) % 60) as u8,
